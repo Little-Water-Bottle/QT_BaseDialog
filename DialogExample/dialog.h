@@ -6,6 +6,8 @@
 #include <QLineEdit>
 #include <QGridLayout>
 #include <QFrame>
+#include "inputdlg.h"
+
 class Dialog : public QDialog
 {
     Q_OBJECT
@@ -26,11 +28,16 @@ private:
     //标准字体对话框
     QPushButton *fontBtn;
     QLineEdit *fontLineEdit;
+    //标准输入对话框
+    QPushButton *inputBtn;
+    InputDlg *inputDlg; //通过类对象调用窗口显示函数
+
 //添加槽函数
 private slots:
     void showFile();
     void showColor();
     void showFont();
+    void showInputDlg();
 
 };
 #endif // DIALOG_H

@@ -219,6 +219,7 @@ Makefile: ../DialogExample/DialogExample.pro ../../../install_location/5.12.9/mi
 		../../../install_location/5.12.9/mingw73_32/mkspecs/features/qt_config.prf \
 		../../../install_location/5.12.9/mingw73_32/mkspecs/win32-g++/qmake.conf \
 		../../../install_location/5.12.9/mingw73_32/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../install_location/5.12.9/mingw73_32/mkspecs/features/exclusive_builds.prf \
 		../../../install_location/5.12.9/mingw73_32/mkspecs/features/toolchain.prf \
 		../../../install_location/5.12.9/mingw73_32/mkspecs/features/default_pre.prf \
@@ -403,6 +404,7 @@ Makefile: ../DialogExample/DialogExample.pro ../../../install_location/5.12.9/mi
 ../../../install_location/5.12.9/mingw73_32/mkspecs/features/qt_config.prf:
 ../../../install_location/5.12.9/mingw73_32/mkspecs/win32-g++/qmake.conf:
 ../../../install_location/5.12.9/mingw73_32/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../install_location/5.12.9/mingw73_32/mkspecs/features/exclusive_builds.prf:
 ../../../install_location/5.12.9/mingw73_32/mkspecs/features/toolchain.prf:
 ../../../install_location/5.12.9/mingw73_32/mkspecs/features/default_pre.prf:

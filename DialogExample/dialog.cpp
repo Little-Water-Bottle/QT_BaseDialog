@@ -47,7 +47,15 @@ Dialog::Dialog(QWidget *parent)
     //添加事件关联
     connect(fontBtn,&QPushButton::clicked,this,&Dialog::showFont);
 
+    //================标准输入对话框==================//
+    inputBtn = new QPushButton;
+    inputBtn->setText(tr("标准输入对话框实例"));
 
+    //添加布局管理
+    mainLayout->addWidget(inputBtn,3,0);
+
+    //添加事件关联
+    connect(inputBtn,&QPushButton::clicked,this,&Dialog::showInputDlg);
 }
 
 //showFile()实现
@@ -74,11 +82,18 @@ void Dialog::showColor()
 void Dialog::showFont()
 {
     bool ok;
-    QFont f = QFontDialog::getFont(&ok);
+    QFont f = QFontDialog::getFont(&ok);    //注意到ok传的是引用，如果选择了ok 则ok为true 如果选择了cancel 则ok为false
     if(ok)
     {
         fontLineEdit->setFont(f);
     }
+}
+
+//showInputDlg()实现
+void Dialog::showInputDlg()
+{
+    inputDlg = new InputDlg(this);
+    inputDlg->show();
 }
 
 Dialog::~Dialog()

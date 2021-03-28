@@ -7,6 +7,9 @@
 #include <QGridLayout>
 #include <QFrame>
 #include "inputdlg.h"
+#include "msgboxdlg.h"
+#include "customdlg.h"
+
 
 class Dialog : public QDialog
 {
@@ -31,6 +34,13 @@ private:
     //标准输入对话框
     QPushButton *inputBtn;
     InputDlg *inputDlg; //通过类对象调用窗口显示函数
+    //消息对话框
+    QPushButton *msgBtn;
+    MsgBoxDlg *msgDlg;
+    //自定义消息框
+    QPushButton *CustomBtn;
+    QLabel *label;
+
 
 //添加槽函数
 private slots:
@@ -38,6 +48,9 @@ private slots:
     void showColor();
     void showFont();
     void showInputDlg();
+    void showMsgDlg();
+    void showCustomDlg();
+
 
 };
 #endif // DIALOG_H

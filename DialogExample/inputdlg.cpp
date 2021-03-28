@@ -1,6 +1,5 @@
 #include "inputdlg.h"
 #include <QInputDialog>
-#include <QInputDialog>
 
 //完成各种控件的创建和槽函数的实现
 //InputDlg::InputDlg 第一个表示所在作用域 第二个表示函数名（构造函数）
@@ -92,7 +91,7 @@ void InputDlg::ChangeName()
 void InputDlg::ChangeSex()
 {
     QStringList SexItems;
-    SexItems << tr("男") << tr("女");
+    SexItems << tr("男") << tr("女"); //准备插入到组合框中的字符串列表
     bool ok;
     //SexItems:下拉列表选项
     //0:默认显示第一个选项
@@ -104,7 +103,6 @@ void InputDlg::ChangeSex()
     {
         sexLabel2->setText(SexItem);
     }
-
 }
 
 void InputDlg::ChangeAge()

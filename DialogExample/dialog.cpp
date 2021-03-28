@@ -2,12 +2,15 @@
 #include <QFileDialog>
 #include <QColorDialog>
 #include <QFontDialog>
+#include <QMessageBox>
 
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
 {
-    this->setWindowTitle("各种标准对话框的实例"); //设置工程对话框标题
-    //各个控件初始化
+    this->setWindowTitle("各种标准对话框的实例"); //设置工程对话框标题——主窗体
+
+
+    //================文件标准对话框==================//
     fileBtn=new QPushButton;    //各个控件对象的初始化
     fileBtn->setText(tr("文件标准对话框实例"));
     fileLineEdit=new QLineEdit; //用来显示选择的文件名
@@ -56,6 +59,31 @@ Dialog::Dialog(QWidget *parent)
 
     //添加事件关联
     connect(inputBtn,&QPushButton::clicked,this,&Dialog::showInputDlg);
+
+    //================消息对话框==================//
+    msgBtn = new QPushButton;
+    msgBtn->setText(tr("标准消息对话框实例"));
+
+    //添加到布局管理
+    mainLayout->addWidget(msgBtn,3,1);
+
+    //添加事件关联
+    connect(msgBtn,&QPushButton::clicked,this,&Dialog::showMsgDlg);
+
+    //================自定义消息对话框==================//
+    CustomBtn = new QPushButton;
+    CustomBtn->setText(tr("用户自定义消息对话框"));
+    label = new QLabel;
+    label->setFrameStyle(QFrame::Panel|QFrame::Sunken);
+
+    //添加到布局管理
+    mainLayout->addWidget(CustomBtn,4,0);
+    mainLayout->addWidget(label,4,1);
+
+    //添加事件关联
+    connect(CustomBtn,&QPushButton::clicked,this,&Dialog::showCustomDlg);
+
+
 }
 
 //showFile()实现
@@ -71,7 +99,7 @@ void Dialog::showFile()
 //showColor()实现
 void Dialog::showColor()
 {
-    QColor c = QColorDialog::getColor(Qt::blue);
+    QColor c = QColorDialog::getColor(Qt::blue,this,"选颜色");
     if(c.isValid())
     {
         colorFram->setPalette(QPalette(c));
@@ -94,6 +122,47 @@ void Dialog::showInputDlg()
 {
     inputDlg = new InputDlg(this);
     inputDlg->show();
+}
+
+//showMsgDlg()实现
+void Dialog::showMsgDlg()
+{
+    msgDlg = new MsgBoxDlg(this);
+    msgDlg->show();
+}
+
+void Dialog::showCustomDlg()
+{
+    label->setText(tr("Custom Message Box"));
+    QMessageBox customMsgBox;
+    customMsgBox.setWindowTitle(tr("用户自定义消息框"));    //设置消息框的标题
+    //QPushButton *yesBtn = customMsgBox.addButton(tr("Yes"),QMessageBox::ActionRole);
+    QPushButton *yesBtn = customMsgBox.addButton(tr("是"),QMessageBox::YesRole);
+    QPushButton *noBtn = customMsgBox.addButton(tr("否"),QMessageBox::NoRole);
+    QPushButton *cancelBtn = customMsgBox.addButton(QMessageBox::Cancel);
+
+    //框体设置
+    //customMsgBox.setText(tr("这是一个用户自定义消息框"));
+    customMsgBox.setText("<h1>一级标题</h1>");
+    customMsgBox.setIconPixmap(QPixmap("Head portrait.jpg"));
+    //消息图标
+    customMsgBox.icon();
+    //customMsgBox.setIcon(QMessageBox::Question);
+    customMsgBox.exec();
+
+    if(customMsgBox.clickedButton() == yesBtn)
+    {
+        label->setText(tr("Custom Message Box/Yes"));
+    }
+    if(customMsgBox.clickedButton() == noBtn)
+    {
+        label->setText(tr("Custom Message Box/No"));
+    }
+    if(customMsgBox.clickedButton() == cancelBtn)
+    {
+        label->setText(tr("Custom Message Box/Cancel"));
+    }
+    return;
 }
 
 Dialog::~Dialog()
